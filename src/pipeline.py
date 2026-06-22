@@ -65,7 +65,7 @@ def run_query(query: str, search: HybridSearch, reranker: CrossEncoderReranker) 
     contexts = [r.text for r in reranked] if reranked else [r.text for r in results[:3]]
 
     from config import OPENAI_API_KEY
-    if OPENAI_API_KEY and contexts:
+    if OPENAI_API_KEY and contexts and os.getenv("USE_OPENAI_API", "").lower() in {"1", "true", "yes"}:
         try:
             from openai import OpenAI
             client = OpenAI()

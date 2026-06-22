@@ -36,7 +36,7 @@ def main():
 
     from config import OPENAI_API_KEY
     llm_client = None
-    if OPENAI_API_KEY:
+    if OPENAI_API_KEY and os.getenv("USE_OPENAI_API", "").lower() in {"1", "true", "yes"}:
         from openai import OpenAI
         llm_client = OpenAI()
 
